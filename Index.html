@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>SPARKMIND - Activa tu creatividad</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/ab9898bc52.js" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/png" href="images/Icon_Sparkmind.png">
+  <link rel="stylesheet" href="CSS/styles.css">
+</head>
+<script>
+function moverBatallas(direccion) {
+
+    const slider = document.getElementById("batallasSlider");
+
+    const scrollAmount = 320;
+
+    slider.scrollBy({
+        left: direccion * scrollAmount,
+        behavior: "smooth"
+    });
+
+}
+</script>
+	
+<body>
+    
+	<script>
+const precioUnidad = 5;
+
+function abrirCarrito(event) {
+    event.preventDefault();
+    document.getElementById("carritoModal").classList.add("activo");
+}
+
+function cerrarTodo() {
+    document.getElementById("carritoModal").classList.remove("activo");
+    document.getElementById("resumenModal").classList.remove("activo");
+    document.getElementById("pagoModal").classList.remove("activo");
+    document.getElementById("yapeModal").classList.remove("activo");
+}
+
+function cambiarCantidad(id, cambio) {
+    const elemento = document.getElementById(id);
+    let valor = parseInt(elemento.innerText);
+
+    valor = valor + cambio;
+
+    if (valor < 0) {
+        valor = 0;
+    }
+
+    elemento.innerText = valor;
+    calcularTotal();
+}
+
+function calcularTotal() {
+    const uva = parseInt(document.getElementById("uva").innerText);
+    const manzana = parseInt(document.getElementById("manzana").innerText);
+    const blueberry = parseInt(document.getElementById("blueberry").innerText);
+
+    const total = (uva + manzana + blueberry) * precioUnidad;
+
+    document.getElementById("totalCarrito").innerText = total;
+
+    return total;
+}
+
+function abrirResumen() {
+    const total = calcularTotal();
+
+    document.getElementById("resUva").innerText = document.getElementById("uva").innerText;
+    document.getElementById("resManzana").innerText = document.getElementById("manzana").innerText;
+    document.getElementById("resBlueberry").innerText = document.getElementById("blueberry").innerText;
+    document.getElementById("resTotal").innerText = total;
+
+    document.getElementById("carritoModal").classList.remove("activo");
+    document.getElementById("resumenModal").classList.add("activo");
+}
+
+function volverCarrito() {
+    document.getElementById("resumenModal").classList.remove("activo");
+    document.getElementById("carritoModal").classList.add("activo");
+}
+
+function abrirPago() {
+    document.getElementById("resumenModal").classList.remove("activo");
+    document.getElementById("pagoModal").classList.add("activo");
+}
+
+function pagarTarjeta() {
+    const numero = document.getElementById("numeroTarjeta").value;
+    const nombre = document.getElementById("nombreTarjeta").value;
+    const fecha = document.getElementById("fechaTarjeta").value;
+    const cvc = document.getElementById("cvcTarjeta").value;
+    const mensaje = document.getElementById("mensajePago");
+
+    if (numero === "" || nombre === "" || fecha === "" || cvc === "") {
+        mensaje.style.color = "#ff3d00";
+        mensaje.innerText = "Completa todos los campos.";
+        return;
+    }
+
+    if (cvc.length !== 3) {
+        mensaje.style.color = "#ff3d00";
+        mensaje.innerText = "Pago rechazado. El CVC debe tener 3 dígitos.";
+        return;
+    }
+
+    mensaje.style.color = "#9cff00";
+    mensaje.innerText = "Pedido comprado correctamente.";
+}
+
+function abrirYape() {
+    document.getElementById("pagoModal").classList.remove("activo");
+    document.getElementById("yapeModal").classList.add("activo");
+}
+
+function pagoCorrecto() {
+    alert("Pedido comprado correctamente.");
+    cerrarTodo();
+}
+</script>
+
+    <header id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-morado fixed-top">
+        <div class="container">
+            <a href="Index.html" class="navbar-brand">
+            <img src="images/logowhite.png" alt="Logo-SparkMind" class="logo-hover" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbar-start" aria-controls="navbar-start" aria-expanded="false"
+                    aria-label="Toggle navigation" >
+                <span class="navbar-toggler-icon" ></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-start">
+               
+				
+				<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+<li class="nav-item">
+<a class="nav-link" href="#Us">NOSOTROS</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="../LINK_02/SLIDER_02.html">HISTORIAS</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#Products">PRODUCTOS</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="../LINK_03/SLIDER_03.html">TOMA EL MICRO</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#Contact">CONTACTO</a>
+</li>
+
+</ul>
+				
+				
+			<a href="#" class="cart-icon" onclick="abrirCarrito(event)">
+    <img src="images/ccompras.png" alt="Carrito">
+</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="carouselE1" class="carousel slide" data-bs-ride="carosuel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselE1"
+                    data-bs-slide-to="0" class="active" aria-current="true"
+                    aria-label="Slide 1">
+            </button>
+             <button type="button" data-bs-target="#carouselE1"
+                    data-bs-slide-to="1" 
+                    aria-label="Slide 2">
+            </button>
+             <button type="button" data-bs-target="#carouselE1"
+                    data-bs-slide-to="2" 
+                    aria-label="Slide 3">
+            </button>
+        </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="images/1.png" class="d-block w-100" alt="sparkmind-1">
+                <div class="carousel-caption">
+                    <h1>SPARK FREESTYLE</h1>
+                    <p>
+                        SPARK Freestyle es un evento urbano inspirado en la cultura del freestyle, la música y la conexión entre jóvenes que buscan expresarse auténticamente. A través de batallas, interacción en vivo y contenido digital, el evento crea una experiencia dinámica donde la energía, el talento y la comunidad se unen en un mismo espacio.
+                    </p>
+                    <p><a href="../LINK_01/SLIDER_01.html" class="btn btn-primary mt-3 btn-sparkmind">VER MÁS</a></p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="images/2.png" class="d-block w-100" alt="sparkmind-1">
+                <div class="carousel-caption">
+                    <h1>HISTORIAS QUE INSPIRAN</h1>
+                    <p>
+                        En SPARK Freestyle creemos en las historias que nacen desde la autenticidad, el esfuerzo y la pasión por expresarse. Cada participante aporta una voz única que transforma el escenario en un espacio de conexión, talento y crecimiento, creando momentos que inspiran dentro y fuera del freestyle.
+                    </p>
+                    <p><a href="../LINK_02/SLIDER_02.html" class="btn btn-primary mt-3 btn-sparkmind">VER MÁS</a></p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <img src="images/3.png" class="d-block w-100" alt="sparkmind-1">
+                <div class="carousel-caption">
+                    <h1>TOMA EL MICRO</h1>
+                    <p>
+                        “Toma el Micro” es el espacio donde nuevos talentos pueden ser parte de SPARK Freestyle. A través del formulario de inscripción y el calendario de eventos, los participantes podrán registrarse, conocer las próximas fechas y demostrar su talento en un escenario pensado para la expresión, la música y la cultura urbana.
+                    </p>
+                    <p><a href="../LINK_03/SLIDER_03.html" class="btn btn-primary mt-3 btn-sparkmind">VER MÁS</a></p>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselE1"
+                data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>    
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselE1"
+                data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>    
+        </button>
+    </div>
+    </header>
+	
+<section class="batallas" id="Historias">
+    <div class="container">
+
+        <span class="batallas-span">FREESTYLE EN VIVO</span>
+        <h2 class="batallas-h2">BATALLAS</h2>
+        <hr class="batallas-hr">
+
+        <div class="batallas-wrap">
+            <button class="batalla-arrow batalla-left" onclick="moverBatallas(-1)">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+
+            <div class="batallas-slider" id="batallasSlider">
+
+                <div class="batalla-card">
+                    <img src="images/imagesB1.png" alt="">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                    <p>SPARK Freestyle #01</p>
+                </div>
+
+                <div class="batalla-card">
+                    <img src="images/imagesB2.png" alt="">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                    <p>Batalla Central</p>
+                </div>
+
+                <div class="batalla-card">
+                    <img src="images/imagesB3.png" alt="">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                    <p>Noche Urbana</p>
+                </div>
+
+                <div class="batalla-card">
+                    <img src="images/imagesB4.png" alt="">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                    <p>Toma el Micro</p>
+                </div>
+
+                <div class="batalla-card">
+                    <img src="images/imagesB5.png" alt="">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                    <p>Flow Callejero</p>
+                </div>
+
+                <div class="batalla-card">
+                    <img src="images/imagesB6.png" alt="">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                    <p>Rima Final</p>
+                </div>
+
+                <div class="batalla-card">
+                    <img src="images/imagesB7.png" alt="">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                    <p>Duelo Urbano</p>
+                </div>
+
+                <div class="batalla-card">
+                    <img src="images/imagesB8.png" alt="">
+                    <div class="play-btn"><i class="bi bi-play-fill"></i></div>
+                    <p>Escenario Spark</p>
+                </div>
+
+            </div>
+
+            <button class="batalla-arrow batalla-right" onclick="moverBatallas(1)">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </div>
+
+    </div>
+</section>
+
+    </div>
+
+</section>
+    <section class="nosotros" id="Us">
+    <div class="nosotros-content container">
+        <div class="nosotros-img"> 
+            <img src="images/E1.png" alt="">
+        </div>
+        <div class="nosotros-txt">
+            <span class="nosotros-span">VIBRA SPARK</span>
+            <h2 class="nosotros-h2">NOSOTROS</h2>
+            <hr class="hr-nosotros">
+            <p class="nosotros-p">
+                SPARK nació con la idea de crear una bebida diferente, inspirada en la energía de las noches, la música y los momentos que se viven entre amigos. Queríamos una experiencia auténtica, con personalidad propia y una vibra que conecte con quienes disfrutan salir de lo común.
+            </p>
+            <p class="nosotros-p">
+                Inspirados en la cultura urbana y en sabores que destacan, creamos una bebida pensada para acompañar cada momento con actitud y estilo. Así nació SPARK: una mezcla de sabor, presencia y buena vibra para compartir donde sea que empiece la noche.
+            </p>
+        </div>
+    </div>
+    </section>
+
+    <section class="beneficios" id="Benefits">
+        <div class="beneficios-content container">
+            <div class="beneficios-txt">
+                <span class="beneficios-span">SABOR Y ACTITUD</span>
+                <h2 class="beneficios-h2">EXPERIENCIA</h2>
+                <hr class="hr-beneficios">
+                <p class="beneficios-p">
+                    En SPARK creemos que cada momento merece sentirse diferente. Por eso creamos una bebida pensada para acompañar noches auténticas, conversaciones reales y experiencias que conectan con tu vibra. Cada lata combina sabor, actitud y energía urbana en una sola experiencia.
+                </p>
+                <p class="beneficios-p">
+                    Ya sea compartiendo entre amigos, disfrutando de la música o viviendo nuevas historias, SPARK está hecho para quienes buscan salir de lo común. Más que una bebida, es parte del ambiente, del ritmo y de esos momentos que se quedan contigo.
+                </p>
+            </div>
+            <div class="beneficios-img">
+                <img src="images/E2.png" alt="">
+            </div>
+        </div>
+    </section>
+
+    <main class="productos" id="Products">
+        <span class="productos-span">TU SABOR FAVORITO</span>
+        <h2 class="productos-h2">PRODUCTOS</h2>
+        <hr class="productos-hr">
+
+        <div class="productos-content container">      
+            <div class="sabor1">
+                <span class="sabor1-span">SABOR UVA</span>
+                <img src="images/LAT1.png" alt="sabor1" class="sabor1-img">
+                <p><a href="../LINK_04/SABOR_01.html" class="btn btn-primary mt-3 btn-sparkmind">VER MÁS</a></p>
+                <p class="sabor1-p">Un sabor intenso y refrescante con el toque clásico de la uva. Perfecto para acompañar noches llenas de música, buena vibra y momentos para compartir.</p>
+            </div>
+
+             <div class="sabor1">
+                <span class="sabor1-span">SABOR MANZANA</span>
+                <img src="images/LAT2.png" alt="sabor1" class="sabor1-img">
+                <p><a href="../LINK_05/SABOR_02.html" class="btn btn-primary mt-3 btn-sparkmind">VER MÁS</a></p>
+                <p class="sabor1-p">Una mezcla suave y vibrante con notas frutales de manzana verde. Ideal para quienes buscan un sabor fresco con actitud y personalidad.</p>
+            </div>
+
+             <div class="sabor1">
+                <span class="sabor1-span">SABOR BLUE BERRY</span>
+                <img src="images/LAT3.png" alt="sabor1" class="sabor1-img">
+                <p><a href="../LINK_06/SABOR_03.html" class="btn btn-primary mt-3 btn-sparkmind">VER MÁS</a></p>
+                <p class="sabor1-p">Un sabor dulce y atrevido inspirado en los frutos azules. Una opción pensada para disfrutar cada momento con estilo y buena energía.</p>
+            </div>
+        </div>
+    </main>
+  
+    <section class="contacto" id="Contact">
+        <div class="contacto-content">
+            <div class="contacto-txt">
+                <span class="contacto-span">Dudas, escríbenos</span>
+                <h2 class="contacto-h2">CONTACTO</h2>
+                <hr class="contacto-hr">
+                <form>
+                    <input type="text" placeholder="Nombre">
+                    <input type="text" placeholder="E-mail">
+                    <input type="text" placeholder="Mensaje">
+                    <a href="#" class="contacto-btn">ENVIAR</a>
+                </form>
+            </div>
+             <div class="contacto-img">
+            <img src="images/E3.png" alt="contacto">
+            </div>
+        </div>
+    </section>
+
+<!-- MODAL 1: CARRITO -->
+<div class="carrito-modal" id="carritoModal">
+    <div class="carrito-box">
+
+        <button class="cerrar-carrito" onclick="cerrarTodo()">×</button>
+
+        <span class="carrito-span">COMPRA SPARK</span>
+        <h2 class="carrito-h2">ELIGE TU SABOR</h2>
+        <hr class="carrito-hr">
+
+        <div class="carrito-productos">
+
+            <div class="carrito-item">
+                <img src="images/LAT1.png" alt="">
+                <h3>SABOR UVA</h3>
+                <p class="precio">S/ 5.00</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad('uva', -1)">-</button>
+                    <span id="uva">0</span>
+                    <button onclick="cambiarCantidad('uva', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="carrito-item">
+                <img src="images/LAT2.png" alt="">
+                <h3>SABOR MANZANA</h3>
+                <p class="precio">S/ 5.00</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad('manzana', -1)">-</button>
+                    <span id="manzana">0</span>
+                    <button onclick="cambiarCantidad('manzana', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="carrito-item">
+                <img src="images/LAT3.png" alt="">
+                <h3>SABOR BLUE BERRY</h3>
+                <p class="precio">S/ 5.00</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad('blueberry', -1)">-</button>
+                    <span id="blueberry">0</span>
+                    <button onclick="cambiarCantidad('blueberry', 1)">+</button>
+                </div>
+            </div>
+
+        </div>
+
+        <h3 class="total-carrito">Total: S/ <span id="totalCarrito">0</span>.00</h3>
+
+        <div class="carrito-botones">
+            <button class="btn-volver" onclick="cerrarTodo()">VOLVER A PRODUCTOS</button>
+            <button class="btn-pago" onclick="abrirResumen()">CONTINUAR COMPRA</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- MODAL 2: RESUMEN -->
+<div class="carrito-modal" id="resumenModal">
+    <div class="carrito-box resumen-box">
+
+        <button class="cerrar-carrito" onclick="cerrarTodo()">×</button>
+
+        <span class="carrito-span">RESUMEN DE COMPRA</span>
+        <h2 class="carrito-h2">CONFIRMAR PEDIDO</h2>
+        <hr class="carrito-hr">
+
+        <div class="resumen-lista">
+            <p>Sabor Uva: <strong><span id="resUva">0</span></strong></p>
+            <p>Sabor Manzana: <strong><span id="resManzana">0</span></strong></p>
+            <p>Sabor Blue Berry: <strong><span id="resBlueberry">0</span></strong></p>
+            <h3>Total: S/ <span id="resTotal">0</span>.00</h3>
+        </div>
+
+        <div class="carrito-botones">
+            <button class="btn-volver" onclick="volverCarrito()">ATRÁS</button>
+            <button class="btn-pago" onclick="abrirPago()">CONFIRMAR PAGO</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- MODAL 3: PAGO -->
+<div class="carrito-modal" id="pagoModal">
+    <div class="carrito-box pago-box">
+
+        <button class="cerrar-carrito" onclick="cerrarTodo()">×</button>
+
+        <span class="carrito-span">AGREGAR TARJETA</span>
+        <h2 class="carrito-h2">DATOS DE PAGO</h2>
+        <hr class="carrito-hr">
+
+        <div class="form-pago">
+            <input id="numeroTarjeta" type="text" placeholder="Número de tarjeta">
+            <input id="nombreTarjeta" type="text" placeholder="Nombre del titular">
+            <input id="fechaTarjeta" type="text" placeholder="MM/AA">
+            <input id="cvcTarjeta" type="text" placeholder="CVC">
+        </div>
+
+        <button class="btn-pago btn-full" onclick="pagarTarjeta()">PAGAR CON TARJETA</button>
+
+        <div class="yape-box" onclick="abrirYape()">
+            <img src="images/yape.png" alt="Yape">
+            <p>Pagar con Yape</p>
+        </div>
+
+        <p id="mensajePago" class="mensaje-pago"></p>
+
+    </div>
+</div>
+
+<!-- MODAL 4: YAPE QR -->
+<div class="carrito-modal" id="yapeModal">
+    <div class="carrito-box qr-box">
+
+        <button class="cerrar-carrito" onclick="cerrarTodo()">×</button>
+
+        <span class="carrito-span">PAGO CON YAPE</span>
+        <h2 class="carrito-h2">ESCANEA EL QR</h2>
+        <hr class="carrito-hr">
+
+        <img class="qr-img" src="images/codigoqr.png" alt="Código QR">
+
+        <button class="btn-pago btn-full" onclick="pagoCorrecto()">YA REALICÉ EL PAGO</button>
+
+    </div>
+</div>
+	
+	</section>
+    <footer class="footer">
+		<div class="data-content">
+		<div class="footer-row">
+			<div class="box">
+				<figure>
+					<a href="#">	
+						<img src="images/logo.svg" alt="">
+					</a>
+				</figure>
+			</div>
+		
+			<div class="box">
+				<h2 class="contacto-h2">Compañía</h2>
+				<a href="../WEB_SPARKMIND/Index.html#Us" class="box-p">Nosotros</a>
+				<a href="../WEB_SPARKMIND/Index.html#Benefits" class="box-p">Beneficios</a>
+				<a href="../WEB_SPARKMIND/Index.html#Products" class="box-p">Productos</a>
+				<a href="../WEB_SPARKMIND/Index.html#Contact" class="box-p">Contacto</a>
+			</div>
+			
+			<div class="box">
+				<h2 class="contacto-h2">Legal</h2>
+				<a href="#navbar" class="box-p">Ajustes de cookies</a>
+				<a href="#navbar" class="box-p">Política de privacidad</a>
+				<a href="#navbar" class="box-p">Libro de reclamaciones</a>
+				<a href="#navbar" class="box-p">Términos y condiciones</a>
+			</div>
+			
+			<div class="box">
+				<h2 class="contacto-h2">Síguenos</h2>
+				<div class="social">
+				<a href="https://www.instagram.com/tuusuario" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+				<a href="https://www.tiktok.com/@tuusuario" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i></a>
+				<a href="https://www.facebook.com/tuusuario" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+				</div>
+				<h2 class="contacto-h2">Contáctanos</h2>
+				<div class="contact">
+				<a href="mailto:sparkmind_energydrink@correo.com"><i class="fa-solid fa-envelope"></i></a>
+				<a href="tel:+51987654321"><i class="fa-solid fa-phone"></i></a>
+			</div>
+			</div>	
+			</div>
+		</div>
+		
+	
+		<div class="copyrigth">
+			<small>&copy; 2025 <b>Sparkmind</b> - Todos los derechos reservados.</small>
+		</div>
+	
+	</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    <a href="#" class="scroll-top">
+  <i class="bi bi-arrow-up-circle-fill"></i>
+</a>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const scrollBtn = document.querySelector('.scroll-top');
+    if (!scrollBtn) return;
+    window.addEventListener('scroll', () => {
+      scrollBtn.classList.toggle('visible', window.scrollY > 300);
+    });
+    scrollBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
