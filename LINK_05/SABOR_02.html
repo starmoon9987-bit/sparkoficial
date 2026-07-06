@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>SPARKMIND - Activa tu creatividad</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/ab9898bc52.js" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/png" href="images/Icon_Sparkmind.png">
+  <link rel="stylesheet" href="CSS/styles.css">
+</head>
+
+<body>
+    
+	<script>
+const precioUnidad = 5;
+
+function abrirCarrito(event) {
+    event.preventDefault();
+    document.getElementById("carritoModal").classList.add("activo");
+}
+
+function cerrarTodo() {
+    document.getElementById("carritoModal").classList.remove("activo");
+    document.getElementById("resumenModal").classList.remove("activo");
+    document.getElementById("pagoModal").classList.remove("activo");
+    document.getElementById("yapeModal").classList.remove("activo");
+}
+
+function cambiarCantidad(id, cambio) {
+    const elemento = document.getElementById(id);
+    let valor = parseInt(elemento.innerText);
+
+    valor = valor + cambio;
+
+    if (valor < 0) {
+        valor = 0;
+    }
+
+    elemento.innerText = valor;
+    calcularTotal();
+}
+
+function calcularTotal() {
+    const uva = parseInt(document.getElementById("uva").innerText);
+    const manzana = parseInt(document.getElementById("manzana").innerText);
+    const blueberry = parseInt(document.getElementById("blueberry").innerText);
+
+    const total = (uva + manzana + blueberry) * precioUnidad;
+
+    document.getElementById("totalCarrito").innerText = total;
+
+    return total;
+}
+
+function abrirResumen() {
+    const total = calcularTotal();
+
+    document.getElementById("resUva").innerText = document.getElementById("uva").innerText;
+    document.getElementById("resManzana").innerText = document.getElementById("manzana").innerText;
+    document.getElementById("resBlueberry").innerText = document.getElementById("blueberry").innerText;
+    document.getElementById("resTotal").innerText = total;
+
+    document.getElementById("carritoModal").classList.remove("activo");
+    document.getElementById("resumenModal").classList.add("activo");
+}
+
+function volverCarrito() {
+    document.getElementById("resumenModal").classList.remove("activo");
+    document.getElementById("carritoModal").classList.add("activo");
+}
+
+function abrirPago() {
+    document.getElementById("resumenModal").classList.remove("activo");
+    document.getElementById("pagoModal").classList.add("activo");
+}
+
+function pagarTarjeta() {
+    const numero = document.getElementById("numeroTarjeta").value;
+    const nombre = document.getElementById("nombreTarjeta").value;
+    const fecha = document.getElementById("fechaTarjeta").value;
+    const cvc = document.getElementById("cvcTarjeta").value;
+    const mensaje = document.getElementById("mensajePago");
+
+    if (numero === "" || nombre === "" || fecha === "" || cvc === "") {
+        mensaje.style.color = "#ff3d00";
+        mensaje.innerText = "Completa todos los campos.";
+        return;
+    }
+
+    if (cvc.length !== 3) {
+        mensaje.style.color = "#ff3d00";
+        mensaje.innerText = "Pago rechazado. El CVC debe tener 3 dígitos.";
+        return;
+    }
+
+    mensaje.style.color = "#9cff00";
+    mensaje.innerText = "Pedido comprado correctamente.";
+}
+
+function abrirYape() {
+    document.getElementById("pagoModal").classList.remove("activo");
+    document.getElementById("yapeModal").classList.add("activo");
+}
+
+function pagoCorrecto() {
+    alert("Pedido comprado correctamente.");
+    cerrarTodo();
+}
+</script>
+
+    <header id="navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-morado fixed-top">
+        <div class="container">
+            <a href="../WEB_SPARKMIND/Index.html#navbar" class="navbar-brand">
+            <img src="images/logowhite.png" alt="Logo-SparkMind" class="logo-hover" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbar-start" aria-controls="navbar-start" aria-expanded="false"
+                    aria-label="Toggle navigation" >
+                <span class="navbar-toggler-icon" ></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-start">
+               
+				
+				<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+<li class="nav-item">
+<a class="nav-link" href="../WEB_SPARKMIND/Index.html#Us">NOSOTROS</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="../LINK_02/SLIDER_02.html">HISTORIAS</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="../WEB_SPARKMIND/Index.html#Products">PRODUCTOS</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="../LINK_03/SLIDER_03.html">TOMA EL MICRO</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="../WEB_SPARKMIND/Index.html#Contact">CONTACTO</a>
+</li>
+
+</ul>
+				
+				
+			<a href="#" class="cart-icon" onclick="abrirCarrito(event)">
+    <img src="images/ccompras.png" alt="Carrito">
+</a>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    <section class="slider-3" id="">
+    <div class="slider-3-content container">
+        <div class="slider-3-txt">
+            <span class="slider-3-span">VIBRA FRESCA</span>
+            <h1 class="slider-3-h1">SABOR MANZANA</h1>
+            <hr class="hr-slider-3">
+            <p class="slider-3-p">
+                Spark Manzana ofrece una mezcla refrescante y ligera con un toque ácido que despierta tus sentidos. Su sabor equilibrado crea una experiencia diferente, perfecta para quienes buscan disfrutar la noche con actitud y autenticidad.
+            </p>
+            <p class="slider-3-p">
+                Inspirado en la energía urbana y las conexiones reales, este sabor combina frescura, diversión y estilo en cada sorbo. Spark Manzana acompaña conversaciones, música y momentos espontáneos que se convierten en recuerdos inolvidables.
+            </p>
+        </div>
+        <div class="slider-3-img"> 
+            <img src="images/SABOR_02.png" alt="">
+        </div>
+    </div>
+    </section>
+
+    <section class="tiendas">
+        <h2 class="tiendas-h2">PUNTOS DE VENTA</h2>
+        <hr class="tiendas-hr">
+        <div class="tiendas-container">
+            <div class="tiendas-logo">
+                <img src="images/TAMBO_LOGO.svg" alt="tambo" class="tiendas-img">
+                <p class="tiendas-p">
+                    <a href="https://www.tambo.pe/pedir" target="_blank" class="tiendas-link">
+                    TIENDAS TAMBO
+                    </a>
+                </p>
+            </div>
+            <div class="tiendas-logo">
+                <img src="images/OXXO_LOGO.svg" alt="oxxo" class="tiendas-img">
+                <p class="tiendas-p">
+                    <a href="https://oxxo.pe/catalogo" target="_blank" class="tiendas-link">
+                    TIENDAS OXXO
+                    </a>
+                </p>
+            </div>
+            <div class="tiendas-logo">
+                <img src="images/MASS_LOGO.svg" alt="mass" class="tiendas-img">
+                <p class="tiendas-p">
+                    <a href="https://www.tiendasmass.com.pe/" target="_blank" class="tiendas-link">
+                    TIENDAS MASS
+                    </a>
+                </p>
+            </div>
+            <div class="tiendas-logo">
+                <img src="imageS/LISTO_LOGO.svg" alt="listo" class="tiendas-img">
+                <p class="tiendas-p">
+                    <a href="https://primax.com.pe/tiendas-listo/" target="_blank" class="tiendas-link">
+                    TIENDAS LISTO
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="boton-tiendas"><p><a href="../WEB_SPARKMIND/Index.html" class="btn btn-primary mt-3 btn-sparkmind">VOLVER</a></p></div>
+        </div>
+    </section>
+
+    
+	
+	<!-- MODAL 1: CARRITO -->
+<div class="carrito-modal" id="carritoModal">
+    <div class="carrito-box">
+
+        <button class="cerrar-carrito" onclick="cerrarTodo()">×</button>
+
+        <span class="carrito-span">COMPRA SPARK</span>
+        <h2 class="carrito-h2">ELIGE TU SABOR</h2>
+        <hr class="carrito-hr">
+
+        <div class="carrito-productos">
+
+            <div class="carrito-item">
+                <img src="images/LAT1.png" alt="">
+                <h3>SABOR UVA</h3>
+                <p class="precio">S/ 5.00</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad('uva', -1)">-</button>
+                    <span id="uva">0</span>
+                    <button onclick="cambiarCantidad('uva', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="carrito-item">
+                <img src="images/LAT2.png" alt="">
+                <h3>SABOR MANZANA</h3>
+                <p class="precio">S/ 5.00</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad('manzana', -1)">-</button>
+                    <span id="manzana">0</span>
+                    <button onclick="cambiarCantidad('manzana', 1)">+</button>
+                </div>
+            </div>
+
+            <div class="carrito-item">
+                <img src="images/LAT3.png" alt="">
+                <h3>SABOR BLUE BERRY</h3>
+                <p class="precio">S/ 5.00</p>
+                <div class="cantidad">
+                    <button onclick="cambiarCantidad('blueberry', -1)">-</button>
+                    <span id="blueberry">0</span>
+                    <button onclick="cambiarCantidad('blueberry', 1)">+</button>
+                </div>
+            </div>
+
+        </div>
+
+        <h3 class="total-carrito">Total: S/ <span id="totalCarrito">0</span>.00</h3>
+
+        <div class="carrito-botones">
+            <button class="btn-volver" onclick="cerrarTodo()">VOLVER A PRODUCTOS</button>
+            <button class="btn-pago" onclick="abrirResumen()">CONTINUAR COMPRA</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- MODAL 2: RESUMEN -->
+<div class="carrito-modal" id="resumenModal">
+    <div class="carrito-box resumen-box">
+
+        <button class="cerrar-carrito" onclick="cerrarTodo()">×</button>
+
+        <span class="carrito-span">RESUMEN DE COMPRA</span>
+        <h2 class="carrito-h2">CONFIRMAR PEDIDO</h2>
+        <hr class="carrito-hr">
+
+        <div class="resumen-lista">
+            <p>Sabor Uva: <strong><span id="resUva">0</span></strong></p>
+            <p>Sabor Manzana: <strong><span id="resManzana">0</span></strong></p>
+            <p>Sabor Blue Berry: <strong><span id="resBlueberry">0</span></strong></p>
+            <h3>Total: S/ <span id="resTotal">0</span>.00</h3>
+        </div>
+
+        <div class="carrito-botones">
+            <button class="btn-volver" onclick="volverCarrito()">ATRÁS</button>
+            <button class="btn-pago" onclick="abrirPago()">CONFIRMAR PAGO</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- MODAL 3: PAGO -->
+<div class="carrito-modal" id="pagoModal">
+    <div class="carrito-box pago-box">
+
+        <button class="cerrar-carrito" onclick="cerrarTodo()">×</button>
+
+        <span class="carrito-span">AGREGAR TARJETA</span>
+        <h2 class="carrito-h2">DATOS DE PAGO</h2>
+        <hr class="carrito-hr">
+
+        <div class="form-pago">
+            <input id="numeroTarjeta" type="text" placeholder="Número de tarjeta">
+            <input id="nombreTarjeta" type="text" placeholder="Nombre del titular">
+            <input id="fechaTarjeta" type="text" placeholder="MM/AA">
+            <input id="cvcTarjeta" type="text" placeholder="CVC">
+        </div>
+
+        <button class="btn-pago btn-full" onclick="pagarTarjeta()">PAGAR CON TARJETA</button>
+
+        <div class="yape-box" onclick="abrirYape()">
+            <img src="images/yape.png" alt="Yape">
+            <p>Pagar con Yape</p>
+        </div>
+
+        <p id="mensajePago" class="mensaje-pago"></p>
+
+    </div>
+</div>
+
+<!-- MODAL 4: YAPE QR -->
+<div class="carrito-modal" id="yapeModal">
+    <div class="carrito-box qr-box">
+
+        <button class="cerrar-carrito" onclick="cerrarTodo()">×</button>
+
+        <span class="carrito-span">PAGO CON YAPE</span>
+        <h2 class="carrito-h2">ESCANEA EL QR</h2>
+        <hr class="carrito-hr">
+
+        <img class="qr-img" src="images/codigoqr.png" alt="Código QR">
+
+        <button class="btn-pago btn-full" onclick="pagoCorrecto()">YA REALICÉ EL PAGO</button>
+
+    </div>
+</div>
+	</div>
+	
+	</section>
+    <footer class="footer">
+		<div class="data-content">
+		<div class="footer-row">
+			<div class="box">
+				<figure>
+					<a href="#">	
+						<img src="images/logo.svg" alt="">
+					</a>
+				</figure>
+			</div>
+		
+			<div class="box">
+				<h2 class="contacto-h2">Compañía</h2>
+				<a href="../WEB_SPARKMIND/Index.html#Us" class="box-p">Nosotros</a>
+				<a href="../WEB_SPARKMIND/Index.html#Benefits" class="box-p">Beneficios</a>
+				<a href="../WEB_SPARKMIND/Index.html#Products" class="box-p">Productos</a>
+				<a href="../WEB_SPARKMIND/Index.html#Contact" class="box-p">Contacto</a>
+			</div>
+			
+			<div class="box">
+				<h2 class="contacto-h2">Legal</h2>
+				<a href="#navbar" class="box-p">Ajustes de cookies</a>
+				<a href="#navbar" class="box-p">Política de privacidad</a>
+				<a href="#navbar" class="box-p">Libro de reclamaciones</a>
+				<a href="#navbar" class="box-p">Términos y condiciones</a>
+			</div>
+			
+			<div class="box">
+				<h2 class="contacto-h2">Síguenos</h2>
+				<div class="social">
+				<a href="https://www.instagram.com/tuusuario" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+				<a href="https://www.tiktok.com/@tuusuario" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i></a>
+				<a href="https://www.facebook.com/tuusuario" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+				</div>
+				<h2 class="contacto-h2">Contáctanos</h2>
+				<div class="contact">
+				<a href="mailto:sparkmind_energydrink@correo.com"><i class="fa-solid fa-envelope"></i></a>
+				<a href="tel:+51987654321"><i class="fa-solid fa-phone"></i></a>
+			</div>
+			</div>	
+			</div>
+		</div>
+		
+	
+		<div class="copyrigth">
+			<small>&copy; 2025 <b>Sparkmind</b> - Todos los derechos reservados.</small>
+		</div>
+	
+	</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    <a href="#" class="scroll-top">
+  <i class="bi bi-arrow-up-circle-fill"></i>
+</a>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const scrollBtn = document.querySelector('.scroll-top');
+    if (!scrollBtn) return;
+    window.addEventListener('scroll', () => {
+      scrollBtn.classList.toggle('visible', window.scrollY > 300);
+    });
+    scrollBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
